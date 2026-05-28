@@ -14,6 +14,11 @@ Este projeto simula esse sistema, recebendo dados de uma missão experimental e 
 
 
 ## Estruturas de dados utilizadas
+ - Lista (— foi usada para armazenar séries temporais de geração solar, consumo e temperatura ao longo dos 8 horários do sol marciano. A ordem dos elementos representa a sequência cronológica das leituras.
+ - Dicionário — usado para acessar o status e a criticidade de cada módulo diretamente pelo nome, sem precisar percorrer uma lista.
+ - Fila (deque) — usada para organizar alertas pendentes por ordem de chegada, garantindo que o alerta mais antigo seja tratado primeiro (FIFO).
+ - Pilha (list com append/pop) — usada para registrar os eventos críticos analisados, permitindo consultar o evento mais recente com facilidade (LIFO).
+ - Matriz (lista de listas) — usada para representar as leituras de telemetria por horário e variável, onde cada linha é um horário e cada coluna é uma grandeza medida.
 
 
 ## Regras lógicas principais
