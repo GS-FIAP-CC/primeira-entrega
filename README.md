@@ -28,6 +28,9 @@ Este projeto simula esse sistema, recebendo dados de uma missão experimental e 
 ## Exemplo de entrada e saída
 
 
+## Recomendações geradas pelo sistema
+
+
 ## Link do vídeo
 
 
