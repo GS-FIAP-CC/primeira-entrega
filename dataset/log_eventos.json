@@ -1,0 +1,107 @@
+{
+  "missao": "Aurora Base - Sol 147",
+  "data_sol": "2031-03-15",
+  "total_eventos": 10,
+  "eventos": [
+    {
+      "id": 1,
+      "timestamp": "2031-03-15 02:47:11",
+      "tipo": "MODO_ECONOMIA",
+      "modulo_afetado": "baterias",
+      "severidade": "normal",
+      "descricao": "Reserva do banco de baterias atingiu 52.3% (261.5 kWh), abaixo do limiar de alerta de 55% (275 kWh). Sem geracao solar ou eolica disponivel. Taxa de descarga atual: 15.4 kWh/ciclo.",
+      "acao_tomada": "Sistema supervisorio ativou MODO_ECONOMIA nível 1: reducao de 20% na iluminacao nao-essencial, suspensao de cargas deferives no modulo de armazenamento, notificacao enviada a tripulacao.",
+      "resolvido": true
+    },
+    {
+      "id": 2,
+      "timestamp": "2031-03-15 04:12:38",
+      "tipo": "REINICIALIZACAO",
+      "modulo_afetado": "comunicacao",
+      "severidade": "alerta",
+      "descricao": "Perda total de sinal com estacao de retransmissao em orbita (DSN-Mars Node 3). BER (taxa de erro de bit) excedeu limiar critico de 1e-3. Ultima telemetria recebida ha 187 segundos.",
+      "acao_tomada": "Sistema executou reinicializacao automatica do transceptor de banda X. Sequencia de boot completada em 43s. Sinal reestabelecido com qualidade de 68%. Log de perda registrado para analise pos-missao.",
+      "resolvido": true
+    },
+    {
+      "id": 3,
+      "timestamp": "2031-03-15 06:33:55",
+      "tipo": "FALHA_SENSOR",
+      "modulo_afetado": "energia_eolica",
+      "severidade": "alerta",
+      "descricao": "Sensor acelerometrico no rolamento principal (eixo Z) registrou vibracao de 4.7 g RMS, excedendo limite operacional de 3.2 g RMS. Padrao de frequencia sugere fadiga em fase inicial de desgaste do rolamento dianteiro.",
+      "acao_tomada": "Sistema supervisorio executou desligamento controlado da turbina eolica (rampa de parada em 90s). Modo de manutencao preditiva ativado. Geracao eolica zerada. Alerta de manutencao criado com prioridade alta para proximo EVA disponivel.",
+      "resolvido": false
+    },
+    {
+      "id": 4,
+      "timestamp": "2031-03-15 08:51:04",
+      "tipo": "ALERTA",
+      "modulo_afetado": "energia_solar",
+      "severidade": "alerta",
+      "descricao": "Sensores de irradiancia detectaram reducao de 14.8% na insolacao prevista para o horario (modelo: 26.7 kWh, real: 22.7 kWh). Cameras externas confirmam deposito de particulado fino nos paineis — tempestade de poeira regional em aproximacao do setor NE.",
+      "acao_tomada": "Sistema ajustou projecao de carga do dia para refletir reducao de geracao. Algoritmo MPPT reotimizado para condicoes de baixa irradiancia. Modo de precaucao energetica mantido ate normalizacao da atmosfera.",
+      "resolvido": false
+    },
+    {
+      "id": 5,
+      "timestamp": "2031-03-15 09:17:29",
+      "tipo": "MUDANCA_PRIORIDADE",
+      "modulo_afetado": "laboratorio",
+      "severidade": "normal",
+      "descricao": "Com turbina eolica offline e geracao solar reduzida por tempestade de poeira, balanco energetico projetado para o Sol 147 indica deficit potencial de 38.4 kWh no periodo noturno. Laboratorio opera com carga de 6.2 kWh/ciclo.",
+      "acao_tomada": "Sistema supervisorio reduziu prioridade do laboratorio de 5 para 7 no esquema de despacho de cargas. Equipamentos nao-criticos do laboratorio colocados em standby. Experimentos em curso nao interrompidos. Decisao registrada e notificada ao responsavel cientifico.",
+      "resolvido": true
+    },
+    {
+      "id": 6,
+      "timestamp": "2031-03-15 11:44:17",
+      "tipo": "ALERTA",
+      "modulo_afetado": "comunicacao",
+      "severidade": "critico",
+      "descricao": "Qualidade do sinal do transceptor de banda X caiu para 48.3%, abaixo do limiar critico de 50%. Analise espectral indica interferencia atmosferica intensa correlacionada com a frente de tempestade de poeira identificada no evento 4. SNR atual: 6.1 dB.",
+      "acao_tomada": "Protocolo de comunicacao de emergencia ativado: reducao de taxa de transmissao de 2 Mbps para 256 kbps, priorizacao de telemetria critica de suporte a vida e baterias. Janela de comunicacao proxima agendada para 14:30 UT. Tripulacao alertada.",
+      "resolvido": false
+    },
+    {
+      "id": 7,
+      "timestamp": "2031-03-15 13:28:42",
+      "tipo": "MODO_ECONOMIA",
+      "modulo_afetado": "baterias",
+      "severidade": "normal",
+      "descricao": "Geracao solar acumulada desde 06:00 totalizou 61.1 kWh. Reserva do banco de baterias atingiu 254.5 kWh (50.9%), superando limiar de retomada segura de 50.0% (250 kWh). Balanco energetico do turno diurno positivo em +7.2 kWh.",
+      "acao_tomada": "MODO_ECONOMIA nivel 1 desativado. Cargas deferidas do modulo de armazenamento reativadas. Iluminacao nao-essencial restaurada ao nivel nominal. Sistema retornou ao perfil operacional padrao Sol 147.",
+      "resolvido": true
+    },
+    {
+      "id": 8,
+      "timestamp": "2031-03-15 16:02:09",
+      "tipo": "FALHA_SENSOR",
+      "modulo_afetado": "suporte_vida",
+      "severidade": "alerta",
+      "descricao": "Sensor de CO2 primario (SL-CO2-01) registrou leitura de 1.847% v/v, 43% acima do valor esperado para o volume pressurizado atual (1.291% v/v). Sensor redundante SL-CO2-02 indica 1.304% v/v — divergencia de 0.543 pontos percentuais entre sensores.",
+      "acao_tomada": "Sensor SL-CO2-01 marcado como suspeito e excluido do calculo de media do sistema. Controle atmosferico baseado exclusivamente em SL-CO2-02 e SL-CO2-03. Procedimento de calibracao agendado. Tripulacao notificada para verificacao manual.",
+      "resolvido": false
+    },
+    {
+      "id": 9,
+      "timestamp": "2031-03-15 21:19:53",
+      "tipo": "FALHA_SENSOR",
+      "modulo_afetado": "energia_solar",
+      "severidade": "alerta",
+      "descricao": "Monitor do inversor fotovoltaico registrou geracao de 18.5 kWh as 21:00 UT. Modelo de irradiancia para Sol 147, latitude -14.7 graus, indica angulo solar de -22.3 graus (abaixo do horizonte). Geracao solar fisicamente incompativel com condicoes astronomicas atuais.",
+      "acao_tomada": "Leitura de 18.5 kWh as 21:00 UT sinalizada como invalida e isolada do historico de geracao. Sensor de corrente DC do campo 3 (SC-DC-03) marcado para inspecao. Balanco energetico recalculado desconsiderando valor suspeito. Engenharia de energia notificada.",
+      "resolvido": false
+    },
+    {
+      "id": 10,
+      "timestamp": "2031-03-15 23:55:00",
+      "tipo": "INFO",
+      "modulo_afetado": "SISTEMA",
+      "severidade": "normal",
+      "descricao": "Ciclo de diagnostico automatico do Sol 147 concluido. Resumo operacional: 8 modulos monitorados, 2 em modo de alerta (energia_eolica, comunicacao), 3 falhas de sensor abertas (SL-CO2-01, SC-DC-03, energia_eolica), reserva de bateria em 45.6% (228 kWh), geracao solar do dia 86.1 kWh vs projetado 98.4 kWh (-12.5% por tempestade de poeira).",
+      "acao_tomada": "Relatorio diagnostico Sol 147 compilado e armazenado em memoria nao-volatil. Pacote de telemetria comprimido (4.2 MB) enfileirado para transmissao na proxima janela de comunicacao disponivel. Parametros iniciais do Sol 148 carregados.",
+      "resolvido": true
+    }
+  ]
+}
