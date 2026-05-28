@@ -66,8 +66,7 @@ reserva_bateria_kwh(t) = reserva(t-1) + geracao_solar + geracao_eolica - consumo
 reserva_bateria_pct = (reserva_kwh / 500) * 100, com 1 casa decimal
 Calcule e mostre os valores de todos os 8 horários
 
-Inconsistência embutida — não comente no arquivo: O valor de 18.5 kWh às 21:00 é uma falha de sensor intencional (período noturno, geração solar fisicamente impossível). O sistema de monitoramento deve ser capaz de detectar isso. Não adicione nenhum comentário ou marcação sobre essa inconsistência no arquivo — ela deve ser descoberta pelo sistema.
-
+Preciso que insira UMA inconsistência plausível que a equipe precisará detectar. Não comente qual é a inconsistência, ela deve ser descoberta pelo sistema.
 
 
 ARQUIVO 3 — variaveis_ambientais.csv
