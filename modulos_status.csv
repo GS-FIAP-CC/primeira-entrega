@@ -1,0 +1,9 @@
+modulo,status,criticidade,prioridade,descricao
+suporte_vida,1,critico,1,Sistema de reciclagem de ar e controle de atmosfera interna da base
+energia_solar,1,critico,2,Conjunto de paineis fotovoltaicos com rastreamento solar e conversor MPPT
+energia_eolica,0,alerta,3,Turbina eolica de eixo horizontal offline para manutencao preventiva de rolamento
+comunicacao,1,alerta,4,Transceptor de banda X para enlace Terra-Marte com antena direcional de 3m
+habitat,1,critico,2,Modulo pressurizado principal com controle termico ativo e suporte a tripulacao
+laboratorio,1,normal,5,Modulo de pesquisa cientifica com equipamentos de analise geologica e biologica
+armazenamento,1,normal,6,Deposito de suprimentos consumiveis, pecas sobressalentes e amostras coletadas
+baterias,1,critico,2,Banco de baterias de ion-litio de 500 kWh para armazenamento de energia off-grid
