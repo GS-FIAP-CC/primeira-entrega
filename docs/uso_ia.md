@@ -195,18 +195,6 @@ Para deixar claro o que é trabalho original da equipe:
 
 Esta é a seção mais importante: o que a equipe conferiu e validou sobre o que a IA produziu.
 
-### 3.1 Validação do dataset gerado
-
-| Requisito do enunciado | Como validamos | Resultado |
-|------------------------|----------------|-----------|
-| 6 módulos críticos com status binário | Contagem manual em `modulos.csv` | OK |
-| Mínimo 6 horários de leitura energética | Contagem de linhas em `energia.csv` | OK |
-| Variáveis ambientais presentes | Inspeção de `ambiente.csv` | OK |
-| Mínimo 8 registros de log | Contagem em `log_eventos.csv` | OK |
-| Coerência física dos valores | Verificação de faixas (temperatura, radiação, vento) e da equação reserva ≈ reserva_anterior + geração - consumo | OK / [descrever ajustes feitos] |
-| Coerência narrativa (causa e efeito) | Leitura cronológica do log cruzada com os horários energéticos | OK |
-| Inconsistência proposital plantada | [Descrever qual era e como foi identificada] | OK |
-
 **Inconsistência identificada pela equipe:**
 
 > [Descrever aqui qual foi a inconsistência encontrada nos dados gerados pela IA. Ex.: "O módulo de comunicação aparece com status 1 em `modulos.csv`, mas o `log_eventos.csv` registra uma FALHA_SENSOR no módulo e `ambiente.csv` mostra qualidade_comunicacao como 'interrompida' a partir das 18:00. O sistema detectou essa contradição cruzando as três fontes."]
