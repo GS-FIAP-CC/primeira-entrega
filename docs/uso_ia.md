@@ -3,7 +3,6 @@
 **Projeto:** Sistema Inteligente de Monitoramento — Missão Espacial Experimental
 **Global Solution — 1º Semestre 2026 | FIAP**
 
----
 
 ## Política de uso de IA adotada pela equipe
 
@@ -12,8 +11,6 @@ De acordo com a Seção 13 do trabalho da Global Solution, a equipe adotou as se
 - **Permitido e utilizado:** IA para organizar ideias, revisar texto, explicar conceitos e gerar dados simulados
 - **Não utilizado:** geração direta de código de solução, análises ou conclusões
 - Todo conteúdo produzido com apoio de IA foi revisado criticamente pela equipe antes de entrar no projeto
-
----
 
 ## 1. Onde a IA foi utilizada
 
@@ -116,8 +113,6 @@ Exemplos possíveis (preencher apenas se ocorreram):
 - Sugestões de organização do código em funções
 - Apoio na escrita do roteiro do vídeo
 
----
-
 ## 2. Onde a IA NÃO foi utilizada
 
 Para deixar claro o que é trabalho original da equipe:
@@ -128,8 +123,6 @@ Para deixar claro o que é trabalho original da equipe:
 - **Implementação da técnica de previsão** — implementada manualmente sem bibliotecas de ML
 - **Análise dos resultados e conclusões do relatório** — reflexão crítica da equipe
 - **Identificação da inconsistência no dataset** — descoberta por inspeção da equipe
-
----
 
 ## 3. Validação crítica realizada
 
@@ -165,8 +158,6 @@ Reflexão honesta da equipe sobre onde a IA falhou ou precisou de correção:
 - [Ex.: "A IA sugeriu uma inconsistência tão óbvia que ficamos sem desafio analítico. Pedimos uma versão mais sutil."]
 - [Ex.: "O template de README inicial tinha sugestões de estruturas de dados que não fazem sentido para o problema. Substituímos."]
 
----
-
 ## 4. Reflexão final da equipe sobre o uso de IA
 
 Esta seção deve ser escrita pela equipe, com base na experiência real. É um diferencial de avaliação demonstrar reflexão crítica sobre o uso da ferramenta.
@@ -182,6 +173,5 @@ Esta seção deve ser escrita pela equipe, com base na experiência real. É um 
 - [Ex.: "Para o código principal — escrever nós mesmos forçou a entender a fundo o que cada estrutura faz."]
 - [Ex.: "Para as conclusões — a reflexão genuína só sai da experiência da equipe."]
 
----
 
-*Documento elaborado pela equipe em conformidade com a Seção 13 do enunciado do Global Solution — 1º Semestre 2026.*
+*Documento elaborado pela equipe em conformidade com a Seção 13 do enunciado do Global Solution 1º Semestre 2026.*
