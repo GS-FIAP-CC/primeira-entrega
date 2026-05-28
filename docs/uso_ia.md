@@ -96,6 +96,13 @@ Ao final, escreva um parágrafo curto descrevendo a NARRATIVA que os dados
 contam, mas SEM revelar onde está a inconsistência.
 ```
 
+**Saida da IA:** 
+
+Vou montar o dataset para a Cenário (a) Base de pesquisa em Marte — turno de ~18 horas com uma tempestade de poeira regional que desencadeia uma cascata de problemas. Deixei os números coerentes em todos os arquivos e embuti uma inconsistência sutil que só aparece com verificação cruzada.
+
+Narrativa do turno — Estação Tharsis-IV (Marte)
+O turno começa nominal ao amanhecer marciano, com geração solar subindo até o pico de meio-dia e bateria sendo recomposta após o consumo noturno de aquecimento. Por volta das 11:48 os sensores meteorológicos identificam uma frente regional de poeira a sudeste; nas horas seguintes a opacidade atmosférica derruba a geração solar em mais da metade, o vento sobe para regime de tempestade e a equipe corta experimentos não-essenciais e ativa modo de economia. À noite, com solar zerada e a turbina eólica praticamente parada, soma-se um evento de partículas solares que eleva a radiação ao nível extrema e corrompe os bancos de dados — o módulo de armazenamento cai. A reserva de bateria sangra de 76% no meio-dia para 49% ao fim do turno, forçando o laboratório a standby compulsório e deixando a base em estado de alerta agudo, sustentada essencialmente por suporte de vida e habitat, à espera do próximo alvorecer.
+
 **Justificativa:** o enunciado autoriza explicitamente o uso de IA para gerar dados simulados.
 
 ### 1.2 [Adicionar outros usos se houver]
