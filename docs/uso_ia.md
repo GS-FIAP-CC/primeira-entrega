@@ -25,83 +25,144 @@ De acordo com a Seção 13 do trabalho da Global Solution, a equipe adotou as se
 **Prompt utilizado:**
 
 ```
-Atue como engenheiro aeroespacial responsável pela telemetria de uma missão
-espacial experimental. Gere um dataset simulando que será usado por um sistema
-estudantil de monitoramento (Python, sem bibliotecas externas).
+Atue como engenheiro aeroespacial responsável pela telemetria da missão Aurora Base,  Sol 147, uma base experimental em Marte alimentada por energia solar fotovoltaica e turbina eólica em sistema off-grid com banco de baterias. Gere os 4 arquivos de dados simulados de telemetria descritos abaixo. Os dados serão usados por um sistema estudantil de monitoramento em Python puro, então precisam estar prontos pra salvar e usar diretamente.
 
-CENÁRIO
-Escolha UM e mantenha coerência total em todo o dataset:
-(a) Base de pesquisa em Marte: atmosfera fina, vento real, radiação alta
-(b) Estação na superfície lunar: sem atmosfera, sem vento, radiação extrema
-(c) Estação orbital experimental: microgravidade, exposição solar variável
 
-Premissa narrativa: simule um turno de 12 a 24 horas em que a situação se
-deteriora ao longo do tempo, gerando dados suficientes para o sistema
-classificar estados normal, alerta e crítico.
 
-DADOS OBRIGATÓRIOS
+ARQUIVO 1 — modulos_status.csv
 
-1 - Status binário de 6 módulos (1 = operacional, 0 = falha):
-    suporte_vida, energia, comunicacao, habitat, laboratorio, armazenamento
+Monte o CSV com o status operacional dos 8 módulos da base. Use os valores exatos abaixo:
 
-2 - Telemetria energética MÍNIMO 6 horários ao longo do turno.
-    Campos por linha: horario (HH:MM), geracao_solar_kwh, geracao_eolica_kwh,
-    consumo_total_kwh, reserva_bateria_pct (0-100).
-    A reserva deve evoluir de forma coerente: reserva_atual ≈ reserva_anterior
-    + geracao_total - consumo. Geração solar = 0 à noite, picos próximos ao
-    meio-dia. Geração eólica = 0 em cenários sem atmosfera.
+suporte_vida: status 1, criticidade critico, prioridade 1
+energia_solar: status 1, criticidade critico, prioridade 2
+energia_eolica: status 0, criticidade alerta, prioridade 3 (offline por manutenção)
+comunicacao: status 1, criticidade alerta, prioridade 4 (sinal degradado)
+habitat: status 1, criticidade critico, prioridade 2
+laboratorio: status 1, criticidade normal, prioridade 5
+armazenamento: status 1, criticidade normal, prioridade 6
+baterias: status 1, criticidade critico, prioridade 2
 
-3 - Variáveis ambientais (snapshot por horário OU único):
-    temperatura_interna_c (habitável: 18-26), temperatura_externa_c (coerente
-    com cenário), nivel_radiacao (baixa | media | alta | extrema),
-    qualidade_comunicacao (boa | instavel | interrompida),
-    velocidade_vento_ms (0 na Lua/órbita).
+Colunas: modulo, status, criticidade, prioridade, descricao Adicione uma descrição técnica curta pra cada módulo.
 
-4 - Log de eventos MÍNIMO 8 registros, ordenados por timestamp.
-    Campos: timestamp, tipo, modulo_afetado, descricao.
-    Tipos válidos: ALERTA, FALHA_SENSOR, REINICIALIZACAO, MUDANCA_PRIORIDADE,
-    MODO_ECONOMIA, INFO.
-    Os eventos devem contar uma história com causa e efeito (ex.: queda na
-    geração solar - modo economia - falha de sensor - reinicialização - alerta
-    de comunicação instável).
 
-5 - INCONSISTÊNCIA PROPOSITAL obrigatória, NÃO sinalizada.
-    Insira UMA inconsistência plausível que a equipe precisará detectar.
-    Exemplos válidos:
-    - Módulo de comunicação marcado como 1 (operacional), mas log mostra falhas
-      E qualidade_comunicacao está "interrompida"
-    - Reserva de bateria aumenta entre dois horários sem geração que justifique
-    - Temperatura interna reportada impossível com habitat marcado como normal
-    Não comente qual é a inconsistência, ela deve ser descoberta pelo sistema.
 
-REGRAS DE COERÊNCIA (críticas)
-- Valores fisicamente plausíveis para o cenário escolhido
-- Linha do tempo com causa e efeito (uma falha tem consequências nos próximos
-  horários)
-- Pelo menos 2 dos 6 módulos devem terminar em estado de alerta ou crítico,
-  senão o sistema não terá o que analisar
-- A inconsistência deve ser SUTIL mas detectável por verificação cruzada entre
-  fontes (status x log x variável ambiental)
+ARQUIVO 2 — energia_leituras.csv
 
-FORMATO DE SAÍDA
-Entregue em 4 arquivos CSV separados (cabeçalho na primeira linha):
-- modulos.csv: modulo, status
-- energia.csv: horario, geracao_solar_kwh, geracao_eolica_kwh,
-  consumo_total_kwh, reserva_bateria_pct
-- ambiente.csv: timestamp, temperatura_interna_c, temperatura_externa_c,
-  nivel_radiacao, qualidade_comunicacao, velocidade_vento_ms
-- log_eventos.csv: timestamp, tipo, modulo_afetado, descricao
+Gere leituras de energia nos horárioa aleatorios com intervalos de 3 horas, representando um sol marciano.
 
-Ao final, escreva um parágrafo curto descrevendo a NARRATIVA que os dados
-contam, mas SEM revelar onde está a inconsistência.
+Colunas: horario, geracao_solar_kwh, geracao_eolica_kwh, consumo_kwh, reserva_bateria_kwh, reserva_bateria_pct
+
+Regras de geração e consumo:
+
+geracao_eolica_kwh = 0.0 em todos os horários (turbina offline)
+geracao_solar_kwh segue curva de irradiância marciana: zero à noite (00:00 e 03:00), crescendo da manhã até o pico ao meio-dia e caindo à tarde
+consumo segue o ciclo de atividade da base: maior durante o expediente (09:00–15:00), menor à noite.
+
+Cálculo da reserva:
+
+Capacidade total do banco de baterias: 500 kWh
+Reserva inicial: 280 kWh (56%)
+reserva_bateria_kwh(t) = reserva(t-1) + geracao_solar + geracao_eolica - consumo
+reserva_bateria_pct = (reserva_kwh / 500) * 100, com 1 casa decimal
+Calcule e mostre os valores de todos os 8 horários
+
+Inconsistência embutida — não comente no arquivo: O valor de 18.5 kWh às 21:00 é uma falha de sensor intencional (período noturno, geração solar fisicamente impossível). O sistema de monitoramento deve ser capaz de detectar isso. Não adicione nenhum comentário ou marcação sobre essa inconsistência no arquivo — ela deve ser descoberta pelo sistema.
+
+
+
+ARQUIVO 3 — variaveis_ambientais.csv
+
+Gere leituras ambientais nos mesmos 8 horários do Arquivo 2.
+
+Colunas: horario, temp_externa_c, temp_interna_c, radiacao_msv, vento_ms, qualidade_comunicacao_pct, pressao_interna_pa
+
+Parâmetros ambientais marcianos:
+
+temp_externa_c: ciclo diurno realista, mínima entre -70°C e -80°C na madrugada, máxima entre -20°C e -25°C ao meio-dia
+temp_interna_c: estável entre 19°C e 23°C (habitat pressurizado com controle térmico ativo)
+radiacao_msv: 0.0 à noite, cresce a partir das 06:00, pico de 0.65–0.75 mSv ao meio-dia, cai à tarde
+vento_ms: entre 8 e 28 m/s com variação ao longo do dia (ventos marcianos irregulares)
+qualidade_comunicacao_pct: entre 52% e 72% (módulo em criticidade alerta, sinal degradado por interferência atmosférica)
+pressao_interna_pa: 101325 Pa fixo (base pressurizada em 1 atm)
+
+Preencha os 8 horários com progressão coerente com o ciclo dia/noite marciano.
+
+
+
+ARQUIVO 4 — log_eventos.json
+
+Gere um JSON de log de eventos do Sol 147 com exatamente 10 registros em ordem cronológica. Os eventos devem contar uma história com causa e efeito ao longo do dia — cada evento deve ser consequência ou contexto do anterior.
+
+Estrutura do JSON:
+
+{
+
+  "missao": "Aurora Base - Sol 147",
+
+  "data_sol": "2031-03-15",
+
+  "total_eventos": 10,
+
+  "eventos": [ lista aqui ]
+
+}
+
+Cada evento:
+
+{
+
+  "id": 1 a 10,
+
+  "timestamp": "2031-03-15 HH:MM:SS",
+
+  "tipo": tipo do evento,
+
+  "modulo_afetado": nome do módulo,
+
+  "severidade": "normal", "alerta" ou "critico",
+
+  "descricao": descrição técnica do que o sensor detectou,
+
+  "acao_tomada": resposta automática do sistema supervisório,
+
+  "resolvido": true ou false
+
+}
+
+Tipos válidos: ALERTA, FALHA_SENSOR, REINICIALIZACAO, MUDANCA_PRIORIDADE, MODO_ECONOMIA, INFO
+
+Narrativa do dia (causa e efeito):
+
+MODO_ECONOMIA -  baterias - normal - baterias atingem nível crítico após noite sem geração solar - resolvido: true
+REINICIALIZACAO - comunicacao - alerta - perda de sinal com a Terra, transmissor reiniciado - resolvido: true
+FALHA_SENSOR - energia_eolica - alerta - sensor de vibração detecta desgaste no rolamento, turbina desligada para manutenção preditiva - resolvido: false
+ALERTA - energia_solar - alerta - tempestade de poeira reduz irradiância nos painéis em ~15% - resolvido: false
+MUDANCA_PRIORIDADE - laboratorio - normal - prioridade do laboratório reduzida para proteger módulos críticos com turbina offline - resolvido: true
+ALERTA - comunicacao - critico - qualidade do sinal cai abaixo de 50%, protocolo de comunicação de emergência ativado - resolvido: false
+MODO_ECONOMIA - baterias - normal - recarga solar eleva reserva acima do limiar seguro, modo de economia desativado - resolvido: true
+FALHA_SENSOR - suporte_vida - alerta - sensor de CO₂ registra leitura fora da faixa operacional esperada, marcado como suspeito - resolvido: false
+FALHA_SENSOR - energia_solar - alerta - sistema detecta leitura de geração solar durante período noturno, valor inconsistente com irradiância esperada - resolvido: false
+INFO - SISTEMA - normal - ciclo de diagnóstico automático concluído com resumo operacional do Sol 147- resolvido: true
+
+Para cada evento, escreva:
+
+descricao: log técnico do sistema, com valores numéricos específicos onde fizer sentido
+acao_tomada: resposta automática do sistema supervisório, como um SCADA real agiria
+resolvido: siga os valores indicados acima
+
+
+
+Entregue os 4 arquivos separados, cada um com seu nome como título, prontos para salvar.
+
 ```
 
 **Saida da IA:** 
 
-Vou montar o dataset para a Cenário (a) Base de pesquisa em Marte — turno de ~18 horas com uma tempestade de poeira regional que desencadeia uma cascata de problemas. Deixei os números coerentes em todos os arquivos e embuti uma inconsistência sutil que só aparece com verificação cruzada.
-
-Narrativa do turno — Estação Tharsis-IV (Marte)
-O turno começa nominal ao amanhecer marciano, com geração solar subindo até o pico de meio-dia e bateria sendo recomposta após o consumo noturno de aquecimento. Por volta das 11:48 os sensores meteorológicos identificam uma frente regional de poeira a sudeste; nas horas seguintes a opacidade atmosférica derruba a geração solar em mais da metade, o vento sobe para regime de tempestade e a equipe corta experimentos não-essenciais e ativa modo de economia. À noite, com solar zerada e a turbina eólica praticamente parada, soma-se um evento de partículas solares que eleva a radiação ao nível extrema e corrompe os bancos de dados — o módulo de armazenamento cai. A reserva de bateria sangra de 76% no meio-dia para 49% ao fim do turno, forçando o laboratório a standby compulsório e deixando a base em estado de alerta agudo, sustentada essencialmente por suporte de vida e habitat, à espera do próximo alvorecer.
+Os 4 arquivos da missão Aurora Base — Sol 147 estão prontos. Aqui está um resumo das decisões técnicas tomadas em cada um:
+modulos_status.csv — 8 módulos com status, criticidades e descrições conforme especificado. energia_eolica offline (status 0), comunicacao em alerta.
+energia_leituras.csv — Curva solar marciana realista com pico de 38.4 kWh ao meio-dia, geração eólica zerada em todos os horários, e o balanço acumulado da bateria calculado passo a passo a partir dos 280 kWh iniciais. A inconsistência às 21:00 está embutida silenciosamente (18.5 kWh de geração solar durante a noite).
+variaveis_ambientais.csv — Ciclo térmico externo variando de -79°C de madrugada a -22.8°C ao meio-dia. Radiação UV seguindo a irradiância solar. Qualidade de comunicação entre 52–71%, temperatura interna estável em ~21-22°C, pressão fixa em 101325 Pa.
+log_eventos.json — 10 eventos em cadeia de causa e efeito ao longo do dia: turbina cai → painel solar perde eficiência pela tempestade → comunicação degrada → sistema entra em modo de economia → sensores suspeitos acumulam → diagnóstico noturno fecha o Sol 147. Descrições com valores numéricos específicos e respostas SCADA realistas.
 
 **Justificativa:** o enunciado autoriza explicitamente o uso de IA para gerar dados simulados.
 
