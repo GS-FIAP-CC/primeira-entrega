@@ -20,7 +20,7 @@ De acordo com a Seção 13 do trabalho da Global Solution, a equipe adotou as se
 
 **Etapa do projeto:** preparação dos dados de telemetria
 
-**O que foi pedido:** geração de quatro arquivos CSV (`modulos.csv`, `energia.csv`, `ambiente.csv`, `log_eventos.csv`) seguindo os requisitos da Seção 7 do enunciado, com uma inconsistência proposital plantada para testar o sistema de diagnóstico.
+**O que foi pedido:** geração de quatro arquivos, sendo dois em CSV e um em JSON, seguindo os requisitos da Seção 7 do enunciado, com uma inconsistência proposital plantada para testar o sistema de diagnóstico.
 
 **Prompt utilizado:**
 
