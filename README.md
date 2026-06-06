@@ -11,6 +11,8 @@ Este projeto simula esse sistema, recebendo dados de uma missão experimental e 
 - Gabriel Luís de Lima Ramos - RM 568984
 
 - Mayara Luisa Vicente Rosa - RM 571955
+  
+- Victor Camargo - RM 568912
 
 
 ## Estruturas de dados utilizadas
