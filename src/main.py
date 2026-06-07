@@ -1,4 +1,6 @@
-##
+##ENTRADA DE MONITORIZACAO DO SISTEMA ## 
+
+
 #Importando os e sys para ler argumentos da linha de comando.
 import os
 import sys
@@ -61,8 +63,10 @@ def imprimir_previsao(prev):
     imprimir_cabecalho("PREVISÃO DE RESERVA ENERGÉTICA")
     print("Histórico (% de bateria):")
     for i, v in enumerate(historico):
+        #Imprimir em casa decimal.
         print(f"  ciclo {i}: {v:.1f}%")
     print(f"\nPróximo ciclo previsto: {proximo:.1f}%")
+    # Classifica a tendência pelo sinal.
     if tendencia > 0:
         sentido = "subindo"
     elif tendencia < 0:
@@ -71,46 +75,58 @@ def imprimir_previsao(prev):
         sentido = "estável"
     print(f"Tendência: {tendencia:+.4f} pp/ciclo ({sentido})")
 
-
+#Se a lista estiver vazia, avisa e sai cedo. Senão, numera as recomendações começando em 1.
 def imprimir_recomendacoes(recs):
     imprimir_cabecalho("RECOMENDAÇÕES")
+     # Sai cedo se não houver nada a mostrar.
     if not recs:
         print("Nenhuma recomendação no momento.")
         return
+    # O 1 no enumerate começa a numeração em 1 em vez de 0.
     for i, r in enumerate(recs, 1):
         print(f"{i}. {r}")
-
+        
+#Define a funcao de anomalia
 def imprimir_anomalias(anomalias):
     imprimir_cabecalho("ANOMALIAS DETECTADAS")
+    #Se a lista estiver vazia, entra no bloco.
     if not anomalias:
         print("Nenhuma anomalia detectada.")
         return
+    # O 1 no enumerate começa a numeração em 1 em vez de 0.
     for i, r in enumerate(anomalias, 1):
         print(f"{i}. {r}")
     print("\n>> Verificar funcionamento dos sensores")
 
 def main():
     pasta = parsear_argumentos()
-
+    # Carrega cada fonte de telemetria pelo módulo dados.
     modulos = dados.carregar_modulos(f"{pasta}/modulos_status.csv")
     energia = dados.carregar_leitura_energia(f"{pasta}/energia_leituras.csv")
     ambiente = dados.carregar_variaveis_ambientais(f"{pasta}/variaveis_ambientais.csv")
     eventos = dados.carregar_log(f"{pasta}/log_eventos.json")
-
+    
+    #Agrupa tudo num único dicionário para passar adiante.
     telemetria = {"modulos": modulos, "energia": energia, "ambiente": ambiente}
-
+    
+    #Gera o diagnóstico e imprime-o.
     diagnostico = logica.diagnosticar(telemetria, eventos)
     imprimir_diagnostico(diagnostico)
 
+    #Calcula a previsão a partir das leituras de energia e imprime.
     prev = previsao.prever_reserva_energetica(energia)
     imprimir_previsao(prev)
-
+    
+    #Busca a função no módulo e se não existir devolve None. 
     gerar = getattr(recomendacoes, "gerar_recomendacoes", None)
+    #Depois só a chama se ela existir, senão usa lista vazia.
     recs = gerar(diagnostico, prev) if gerar else []
     imprimir_recomendacoes(recs)
 
+    #Devolve uma lista de anomalias encontradas.
     anomalias = logica.detectar_anomalias(telemetria)
     imprimir_anomalias(anomalias)
-
+    
+# Só corre quando executado diretamente, não quando importado.
 if __name__ == "__main__":
     main()
