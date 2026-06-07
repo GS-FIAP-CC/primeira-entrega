@@ -1,3 +1,4 @@
+##
 #Importando os e sys para ler argumentos da linha de comando.
 import os
 import sys
