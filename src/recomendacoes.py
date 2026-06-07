@@ -1,4 +1,5 @@
 ## RECOMENDACOES DO PROJETO ##
+
 #Traz o modo config para este
 import config
 
