@@ -1,49 +1,66 @@
+##
+
+# Traz o modulo config para este.
 import config
 
-
+#Fila: FIFO - First In First Out
 class Fila:
     def __init__(self):
+        # lista vazia que guarda os itens
         self.itens = []
 
     def enfileirar(self, item):
+        # Item novo entra sempre no fim da fila.
         self.itens.append(item)
 
     def desenfileirar(self):
+        # Remove e devolve o item mais antigo, o do inicio. 
         if self.itens:
             return self.itens.pop(0)
+        #Se vazia, devolve None.
         return None
 
     def vazia(self):
+        # Verifica se a estrutura e devolve True se estiver vazia.
         return len(self.itens) == 0
 
     def tamanho(self):
+        # Devolve quantos itens existem na estrutura.
         return len(self.itens)
 
-
+#Pilha LIFO - Last in First Out
 class Pilha:
     def __init__(self):
+        # pilha vazia que guarda os itens
         self.itens = []
 
     def empilhar(self, item):
+        # Item novo vai para o topo.
         self.itens.append(item)
 
     def desempilhar(self):
+        # Remove e devolve o item do topo. 
         if self.itens:
             return self.itens.pop()
+        #Se vazia, devolve None.
         return None
 
     def topo(self):
+        # Verifica o topo sem remover e se esticer vazia retorna como NONE.
         return self.itens[-1] if self.itens else None
 
     def vazia(self):
+        # Verifica se a estrutura e devolve True se estiver vazia.
         return len(self.itens) == 0
 
     def tamanho(self):
+        # Devolve quantos itens existem na estrutura.
         return len(self.itens)
 
-
+#Funcao de avaliacao - Classifica um módulo como normal, alerta, crítico ou desconhecido.
 def classificar_modulo(nome, telemetria):
     modulos = telemetria["modulos"]
+    # Se o modulo nao existe na telemetria, retorna como desconhecido.
     if nome not in modulos:
         return "desconhecido"
 
