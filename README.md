@@ -170,7 +170,7 @@ No fim, ficou claro que projetar um sistema desse tipo é antes de tudo um exerc
 ## Estrutura do repositório
 
 ```
-primeira-entrega2/
+primeira-entrega/
 ├── README.md
 ├── data/
 │   ├── modulos_status.csv
