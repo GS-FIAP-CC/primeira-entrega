@@ -80,6 +80,14 @@ def imprimir_recomendacoes(recs):
     for i, r in enumerate(recs, 1):
         print(f"{i}. {r}")
 
+def imprimir_anomalias(anomalias):
+    imprimir_cabecalho("ANOMALIAS DETECTADAS")
+    if not anomalias:
+        print("Nenhuma anomalia detectada.")
+        return
+    for i, r in enumerate(anomalias, 1):
+        print(f"{i}. {r}")
+    print("\n>> Verificar funcionamento dos sensores")
 
 def main():
     pasta = parsear_argumentos()
@@ -101,6 +109,8 @@ def main():
     recs = gerar(diagnostico, prev) if gerar else []
     imprimir_recomendacoes(recs)
 
+    anomalias = logica.detectar_anomalias(telemetria)
+    imprimir_anomalias(anomalias)
 
 if __name__ == "__main__":
     main()
