@@ -166,3 +166,38 @@ def diagnosticar(telemetria, eventos=None):
         "alertas_pendentes": list(fila_alertas.itens),
         "ultimo_evento_critico": pilha_criticos.topo(),
     }
+
+def detectar_anomalias(telemetria):
+    anomalias = []
+
+    energia = telemetria["energia"]
+    ambiente = telemetria["ambiente"]
+    modulos = telemetria["modulos"]
+
+    for i in range(len(energia)):
+        leitura_energia = energia[i]
+        leitura_ambiente = ambiente[i]
+        geracao_solar = leitura_energia["geracao_solar_kwh"]
+        radiacao = leitura_ambiente["radiacao_msv"]
+
+        ## Anomalia 1: geração de energia solar a noite
+        if radiacao == 0 and geracao_solar > 0:
+            anomalias.append(f"Anomalia detectada às {leitura_energia['horario']}: geração solar de {geracao_solar} kWh durante a noite (radiação zero)")
+
+        ## Anomalia 2: valores fora da realidade (< 0% e > 100%)
+        reserva = leitura_energia["reserva_bateria_pct"]
+        if reserva > 100 or reserva < 0:
+            anomalias.append(f"Anomalia detectada às {leitura_energia['horario']}: armazenamento fora da realidade ({reserva})")
+        
+        ## Anomalia 3: módulos desligados e gerando energia
+        status_eolica = modulos["energia_eolica"]["status"]
+        geracao_eolica = leitura_energia["geracao_eolica_kwh"]
+        if status_eolica == 0 and geracao_eolica > 0:
+            anomalias.append(f"Anomalia detectada às {leitura_energia['horario']}: geração de energia eólica com as turbinas desligadas")
+
+        status_solar = modulos["energia_solar"]["status"]
+        geracao_solar = leitura_energia["geracao_solar_kwh"]
+        if status_solar == 0 and geracao_solar > 0:
+            anomalias.append (f"Anomalia detectada às {leitura_energia['horario']}: geração de energia solar com os paineis desligados")
+
+    return anomalias
