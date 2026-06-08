@@ -282,7 +282,7 @@ Nada gerado por IA entra no projeto sem passar pela conferência de pelo menos d
 **3.1 Inconsistência identificada pela equipe:**
 
 A inconsistência plantada nos dados de energia está no horário das 21:00: o arquivo energia_leituras.csv registra 18,5 kWh de geração solar em pleno período noturno. 
-Isso contradiz frontalmente o variaveis_ambientais.csv, que marca radiação 0,0 mSv naquele horário, e ainda casa com o nono evento do log_eventos.json (FALHA_SENSOR em energia_solar, “leitura de geração solar durante período noturno”). Não havia Sol em Marte às nove da noite — logo, o número não podia existir.
+Isso contradiz frontalmente o variaveis_ambientais.csv, que marca radiação 0,0 mSv naquele horário, e ainda casa com o nono evento do log_eventos.json (FALHA_SENSOR em energia_solar, “leitura de geração solar durante período noturno”). Não havia Sol em Marte às nove da noite, entao número não podia existir.
 
 A IA não nos contou onde estava o erro, justamente como pedimos e ela só avisou que havia uma inconsistência embutida. 
 Foi o nosso sistema, cruzando as três fontes (geração de energia, radiação ambiental e log de eventos), que apontou a contradição. 
