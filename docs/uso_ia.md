@@ -193,25 +193,50 @@ Para deixar claro o que é trabalho original da equipe:
 
 ## 3. Validação crítica realizada
 
-Esta é a seção mais importante: o que a equipe conferiu e validou sobre o que a IA produziu.
+Esta é parte do registro foi onde precisavamos olhar o que a IA entregou sem aceitar nada de cara. 
+Nada gerado por IA entra no projeto sem passar pela conferência de pelo menos duas pessoas e na prática, isso significou abrir os arquivos, recalcular alguns valores à mão e cruzar uma fonte com a outra antes de dar qualquer coisa por boa.
 
-**Inconsistência identificada pela equipe:**
+**3.1 Inconsistência identificada pela equipe:**
 
-> [Descrever aqui qual foi a inconsistência encontrada nos dados gerados pela IA. Ex.: "O módulo de comunicação aparece com status 1 em `modulos.csv`, mas o `log_eventos.csv` registra uma FALHA_SENSOR no módulo e `ambiente.csv` mostra qualidade_comunicacao como 'interrompida' a partir das 18:00. O sistema detectou essa contradição cruzando as três fontes."]
+A inconsistência plantada nos dados de energia está no horário das 21:00: o arquivo energia_leituras.csv registra 18,5 kWh de geração solar em pleno período noturno. 
+Isso contradiz frontalmente o variaveis_ambientais.csv, que marca radiação 0,0 mSv naquele horário, e ainda casa com o nono evento do log_eventos.json (FALHA_SENSOR em energia_solar, “leitura de geração solar durante período noturno”). Não havia Sol em Marte às nove da noite — logo, o número não podia existir.
+
+A IA não nos contou onde estava o erro, justamente como pedimos e ela só avisou que havia uma inconsistência embutida. 
+Foi o nosso sistema, cruzando as três fontes (geração de energia, radiação ambiental e log de eventos), que apontou a contradição. 
+
+Se tivéssemos confiado apenas no resumo que a ferramenta escreveu, teríamos aceitado a explicação pronta sem realmente entender por que o valor estava errado.
+
 
 ### 3.2 Validação do template de README
 
-- A equipe conferiu se todas as 10 seções exigidas pelo enunciado (Seção 11) estavam presentes
-- Cada placeholder foi substituído por conteúdo original da equipe — nenhum item ficou com texto genérico
-- A tabela de estruturas de dados foi totalmente reescrita com base nas escolhas reais do projeto
+Conferimos, item por item, se todas as seções exigidas pelo enunciado (Seção 11) estavam contempladas na estrutura sugerida e completamos as que a ferramenta não previu.
+Cada espaço-reservado (placeholder) foi substituído por conteúdo real do projeto. 
+Nenhuma frase-guia genérica ficou no texto final.
+A tabela de estruturas de dados foi reescrita do zero, com as escolhas reais do projeto e a justificativa de cada uma. 
+A versão inicial sugerida pela IA trazia estruturas que não faziam sentido para o nosso problema, e essas foram simplesmente descartadas.
 
-### 3.3 Limitações observadas no uso de IA
+### 3.3 Validação do checklist e do double-check final
 
-Reflexão honesta da equipe sobre onde a IA falhou ou precisou de correção:
+O checklist gerado pela IA foi útil para organizar a divisão de tarefas, mas a equipe não o tratou como verdade pronta. 
+Conferimos cada item contra o enunciado original, porque um checklist é só uma releitura do que a ferramenta entendeu do texto e o que ela entende nem sempre é o que o enunciado de fato exige. Nessa conferência percebemos que alguns itens precisavam de ajuste de redação para refletir com exatidão os requisitos das Seções 7 e 11, e foi a versão revisada por nós, e não a original da IA, que virou o guia da equipe.
 
-- [Ex.: "A primeira versão do dataset gerou geração solar > 0 durante a madrugada. Tivemos que pedir refinamento."]
-- [Ex.: "A IA sugeriu uma inconsistência tão óbvia que ficamos sem desafio analítico. Pedimos uma versão mais sutil."]
-- [Ex.: "O template de README inicial tinha sugestões de estruturas de dados que não fazem sentido para o problema. Substituímos."]
+O mesmo cuidado valeu para o double-check feito antes da entrega. 
+
+A IA respondeu que estava "tudo completo", mas é importante registrar o que essa confirmação significava de verdade, sendo que ela avaliou apenas o que nós descrevemos a ela em texto, sem nunca ter rodado o código nem aberto os arquivos do repositório. Ou seja, a ferramenta confirmou a nossa descrição, não o projeto. 
+
+Por isso, a checagem que realmente contou foi a que a equipe fez manualmente, executando python src/sistema.py, abrindo os quatro arquivos de dados e cruzando cada item do checklist com o que estava de fato implementado. 
+
+A confirmação da IA serviu como um reforço de tranquilidade, mas a responsabilidade pela conferência continuou sendo nossa.
+
+
+### 3.4 Limitações observadas no uso de IA
+
+Ao longo do trabalho, ficou claro para a equipe que a IA acerta na forma com muito mais facilidade do que no conteúdo. Ela organiza, formata e escreve com fluência, mas isso não é o mesmo que estar certa. Algumas limitações que sentimos na pele:
+
+- Confiança que não corresponde à exatidão. No double-check final, a ferramenta confirmou com toda a tranquilidade que estava “tudo completo”, mas baseada apenas no que nós descrevemos a ela, e não no código rodando de fato. Foi a equipe que abriu o terminal, executou o sistema e conferiu cada item contra o enunciado. A IA não roda o projeto, ela simplesmente acredita no que você conta.
+- Sugestões fora do escopo. Logo depois de confirmar a entrega, ela sugeriu adicionar testes automatizados com pytest e um pipeline de integração contínua no GitHub. É uma boa prática de engenharia, mas o enunciado não pedia nada disso, e seguir a sugestão às cegas teria inflado o trabalho com coisas que não eram avaliadas, consumindo tempo que não tínhamos. Foi preciso conhecer o escopo para saber dizer “não” a uma sugestão tecnicamente correta.
+- Tendência a propor o caminho “mais técnico”. Tanto na estrutura do relatório (onde sugeriu um dashboard web) quanto na conferência final, a ferramenta puxava para soluções mais robustas do que o problema exigia. O enunciado pedia saída apenas no terminal, em Python puro e cabia a nós manter o projeto nesse limite.
+- Dados que parecem certos, mas precisam ser recalculados. Os arquivos de telemetria vieram bem formatados e plausíveis, mas “plausível” não é “verificado”. Refizemos o balanço acumulado da bateria à mão para confirmar que os números fechavam a partir dos 280 kWh iniciais.
 
 ## 4. Reflexão final da equipe sobre o uso de IA
 
@@ -219,9 +244,21 @@ Esta seção deve ser escrita pela equipe, com base na experiência real. É um 
 
 **O que aprendemos sobre usar IA em projetos técnicos:**
 
-- [Ex.: "Aprendemos que a IA é boa para acelerar tarefas repetitivas (gerar dados, formatar texto), mas a lógica de negócio precisa vir do humano que entende o problema."]
-- [Ex.: "Percebemos que prompts vagos geram respostas genéricas — quanto mais específicos os requisitos, mais útil a resposta."]
-- [Ex.: "A inconsistência plantada pela IA inicialmente foi grosseira; precisamos guiá-la para algo realmente sutil."]
+A lição que levamos deste trabalho é que a IA é uma ferramenta para facilitar, e não para resolver. Ela auxilia e tira do nosso caminho o que é repetitivo, gerar um dataset coerente, montar um esqueleto de relatório, listar requisitos a partir de um enunciado e isso é valioso e economiza tempo e assim focar no que realmente importa.
+
+Mas em nenhum momento ela substituiu esse pensamento.
+
+Aprendemos também que mesmo as tarefas “seguras”, como fazer um checklist e depois um double-check, precisam ser conferidas. 
+
+A IA montou um checklist ótimo e confirmou nossa entrega, mas quem garantiu que cada item estava de fato cumprido fomos nós, comparando linha por linha com o enunciado e rodando o código. 
+
+Confiar no “está tudo certo” dela sem verificar seria abrir mão justamente da parte que prova que entendemos o trabalho, sendo uma ferramente que auxilia, mas nao faz. 
+
+Outra coisa que ficou evidente é que não basta copiar e colar, é preciso conhecer. Só conseguimos descartar a sugestão do dashboard, recusar o pytest e identificar a inconsistência das 21:00 porque dominávamos o escopo e os dados. 
+
+Quem não conhece o problema aceita qualquer resposta bem escrita, e respostas bem escritas e erradas são exatamente o tipo de armadilha que a IA produz com naturalidade. 
+
+Percebemos ainda, na prática, que prompt vago gera resposta genérica, quanto mais específicos fomos nos requisitos, mais útil foi o retorno.
 
 **Quando NÃO usaríamos IA novamente:**
 
