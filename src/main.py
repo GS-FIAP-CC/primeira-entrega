@@ -98,6 +98,15 @@ def imprimir_anomalias(anomalias):
         print(f"{i}. {r}")
     print("\n>> Verificar funcionamento dos sensores")
 
+def imprimir_analise(analise):
+    media_consumo, menor_reserva, balanco = analise
+    imprimir_cabecalho("ANÁLISE DA TELEMETRIA")
+    print(f"A média do consumo hoje foi: {media_consumo}\n")
+    print(f"O menor registro das reservas foi: {menor_reserva}\n")
+    print("Balanço Energético por Horário:")
+    for horario, saldo in balanco:
+        print(f"  {horario}  {saldo:.2f}")
+
 def main():
     pasta = parsear_argumentos()
     # Carrega cada fonte de telemetria pelo módulo dados.
@@ -108,6 +117,11 @@ def main():
     
     #Agrupa tudo num único dicionário para passar adiante.
     telemetria = {"modulos": modulos, "energia": energia, "ambiente": ambiente}
+
+    #Gera uma análise inicial da telemetria e imprime
+    matriz = dados.montar_matriz_energia(energia)
+    analise = dados.analisar_telemetria(matriz)
+    imprimir_analise(analise)
     
     #Gera o diagnóstico e imprime-o.
     diagnostico = logica.diagnosticar(telemetria, eventos)
