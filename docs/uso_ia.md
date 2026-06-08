@@ -165,20 +165,103 @@ log_eventos.json — 10 eventos em cadeia de causa e efeito ao longo do dia: tur
 
 **Justificativa:** o enunciado autoriza explicitamente o uso de IA para gerar dados simulados.
 
-### 1.2 [Adicionar outros usos se houver]
+### 1.2 Organização da estrutura do relatório e do README
 
-- **Ferramenta utilizada:**
-- **O que foi pedido:**
-- **O que NÃO foi pedido:**
+- **Ferramenta utilizada:** Claude Opus 4.7
+- **O que foi pedido:** uma ordem de tópicos para o relatório e para o README, fácil de seguir, entregue como documento editável.
+- **O que NÃO foi pedido:** conteúdo do relatório em si; a redação de cada tópico ficou inteiramente com a equipe.
+- **Prompt utilizado:**
 
-### 1.3 [Adicionar outros usos se houver]
+``` Claude, bom dia, tenho que escrever o relatório de um trabalho de faculdade sobre um sistema em Python que monitora uma base em Marte. Ele lê uns arquivos de dados, faz um diagnóstico, gera alertas, prevê a reserva de energia e dá recomendações. Me ajuda a montar uma ordem de tópicos pro relatório e pro README? Quero que fique fácil de seguir. ```
 
-Exemplos possíveis (preencher apenas se ocorreram):
+- **Saída da IA:**  ``` Bom dia. Vou montar a estrutura do relatório e do README do Aurora Base num documento Word fácil de seguir. Vou criar o documento Word com a estrutura do relatório e do README. Ran 3 commands, created a file, read a file. Pronto! O documento tem duas partes: a estrutura do relatório (11 tópicos, da capa às referências) e a do README (9 tópicos, mais enxuto e voltado a quem vai rodar o código). Cada item traz uma frase indicando o que escrever, então é só substituir pelo conteúdo do Aurora Base.
+Tem índice automático e os tópicos estão como cabeçalhos, então o Word atualiza o sumário sozinho (clica nele → "Atualizar campo"). O coração do relatório é o tópico 6 (Metodologia), onde entra a justificativa da regressão linear + média móvel.
+Quer que eu já preencha algum tópico com o conteúdo real do seu projeto, ou prefere ir escrevendo você mesma?. ```
 
-- Explicação de conceitos (ex.: como funciona média móvel)
-- Revisão ortográfica/gramatical do relatório
-- Sugestões de organização do código em funções
-- Apoio na escrita do roteiro do vídeo
+A ordem dos tópicos foi aproveitada como ponto de partida, mas a sugestão de um dashboard web foi descartada, já que o enunciado pede saída apenas no terminal, sem interface gráfica nem frameworks web.
+
+### 1.3 Montagem do checklist de requisitos
+
+- **Ferramenta utilizada:** Claude Opus 4.7
+
+- **O que foi pedido:** a partir do enunciado, um checklist completo e organizado por categorias (entrega, repositório, código, dados, estruturas de dados, regras lógicas, alertas, previsão e vídeo) com todos os itens obrigatórios, para dividir tarefas e conferir item por item antes da entrega.
+
+- **Prompt utilizado:**
+
+```Com base no enunciado da Global Solution que vou colar abaixo, monte um checklist completo e organizado por categorias (entrega, repositório, código, dados, estruturas de dados, regras lógicas, alertas, previsão e vídeo) com todos os itens obrigatórios que o trabalho precisa cumprir. Quero usar isso pra dividir as tarefas da equipe e conferir item por item antes de entregar```
+
+- **Saída da IA:** ```Entrega
+Arquivo .TXT submetido na plataforma da faculdade com os dois links
+Link do repositório GitHub público — acessível sem login
+Link do vídeo no YouTube como 'Não Listado' — acessível sem login
+Repositório GitHub
+Repositório está público (não privado)
+Pasta src/ com o arquivo sistema.py
+Pasta data/ com os 4 arquivos de dados (csv e json)
+Pasta docs/ com uso_ia.md preenchido (se usou IA)
+README.md com todos os campos obrigatórios: nome da equipe e RMs, resumo do problema e cenário, estruturas de dados usadas e por quê, regras lógicas e expressão booleana, técnica de previsão e resultado, como executar (python src/sistema.py), exemplo de entrada e saída, recomendações geradas, link do vídeo, conclusões e aprendizados
+Código Python
+Executa sem erros com: python src/sistema.py
+Sem interface gráfica — saída apenas no terminal
+Sem Pandas, NumPy, Scikit-learn, Streamlit ou frameworks web
+Dados lidos de arquivo externo ou embutidos e documentados
+Variáveis 0/1 usadas para status dos módulos
+Tabela de status exibida: normal, alerta ou crítico
+Pelo menos uma regra baseada em faixas de segurança ou estados binários
+Dados Simulados
+Status binário de pelo menos 6 módulos críticos
+Leituras de energia em pelo menos 6 horários com reservas energéticas
+Variáveis ambientais: temperatura, radiação, vento ou comunicação
+Log com pelo menos 8 eventos
+Tipos de evento: alertas, reinicializações, falhas de sensor, mudanças de prioridade ou modos de economia
+Ao menos uma inconsistência proposital detectável pelo sistema
+Estruturas de Dados
+Lista para séries temporais
+Fila (deque) para alertas por ordem de chegada — FIFO
+Pilha para eventos críticos analisados — LIFO
+Dicionário para acesso de módulos pelo nome
+Matriz (lista de listas) para leituras por horário e variável
+Hierarquia aninhada representando energia e habitat
+Regras Lógicas
+IF, ELIF e ELSE para classificar o estado da missão
+Operador AND em pelo menos uma regra
+Operador OR em pelo menos uma regra
+Operador NOT em pelo menos uma regra
+Cada regra explicada em linguagem simples
+Alertas e Recomendações
+Alertas gerados para módulo offline, energia baixa e comunicação comprometida
+Alertas classificados em normal, alerta e crítico
+Alertas exibidos com os mais críticos primeiro
+Recomendação automática para cada alerta
+Análise e Previsão
+Técnica manual sem Pandas, NumPy ou Scikit-learn
+Regressão linear, média móvel ou extrapolação de tendência
+Dados, metodologia e resultado documentados
+Previsão influencia pelo menos uma recomendação do sistema
+Vídeo de Apresentação
+Publicado no YouTube como 'Não Listado'
+Link funciona sem login
+Mostra o sistema em execução no terminal
+Apresenta estruturas de dados e regras lógicas
+Apresenta a técnica de previsão e o resultado
+Todos os integrantes aparecem ou são mencionados ```
+
+O checklist virou o norte da equipe. Foi a partir dele que dividimos quem ficaria com cada parte e nos organizamos para fechar tudo dentro do prazo, riscando os itens conforme eram concluídos. Cada item foi conferido manualmente contra o enunciado original para garantir que nenhum requisito tivesse sido omitido ou interpretado de forma equivocada pela ferramenta.
+
+1.4 Conferência final antes da entrega
+
+- **Ferramenta utilizada:** Claude Opus 4.8
+
+- **O que foi pedido:**  um double-check, comparando o checklist com o que já estava feito, para verificar se faltava algo antes de entregar.
+
+- **Prompt utilizado:**
+
+``` Vou te passar o checklist do trabalho e o que a gente já fez. Confere se está tudo completo ou se ainda falta alguma coisa antes de entregar.```
+
+- **Saída da IA:**
+```Pelo que você descreveu, o trabalho cobre todos os itens obrigatórios do checklist: as cinco estruturas de dados estão usadas e justificadas, as regras com AND, OR e NOT estão presentes, a inconsistência é detectada pelo sistema, a previsão influencia uma recomendação e os quatro arquivos de dados estão prontos. Está completo para entrega. Como sugestão extra, vocês poderiam adicionar testes automatizados com pytest para cada módulo e até integrar um pipeline de CI no GitHub que roda esses testes a cada commit, o que deixaria o projeto num nível bem profissional.```
+
+A  confirmação deu segurança para a entrega, mas a equipe ainda fez uma conferência própria item a item. A sugestão de testes automatizados e pipeline de CI, embora interessante, ficou de fora por fugir do escopo pedido pelo enunciado e do tempo disponível para esta entrega.
 
 ## 2. Onde a IA NÃO foi utilizada
 
@@ -262,8 +345,21 @@ Percebemos ainda, na prática, que prompt vago gera resposta genérica, quanto m
 
 **Quando NÃO usaríamos IA novamente:**
 
-- [Ex.: "Para o código principal — escrever nós mesmos forçou a entender a fundo o que cada estrutura faz."]
-- [Ex.: "Para as conclusões — a reflexão genuína só sai da experiência da equipe."]
+Revendo o caminho que fizemos, há momentos em que o apoio da IA quase nos levou para o lado errado, e que hoje conduziríamos de outra forma. 
+
+A estrutura de relatório que pedimos veio com a sugestão de um dashboard web e se tivéssemos aceitado sem pensar, teríamos começado a construir algo que o enunciado nem permitia. 
+
+O mesmo vale para o checklist: ele foi ótimo como ponto de partida, mas só percebemos que alguns itens não refletiam exatamente o enunciado depois de conferir nós mesmos e se tivéssemos confiado nele de imediato, teríamos trabalhado em cima de uma lista um pouco torta. 
+
+E no double-check final, a IA disse que estava "tudo completo" antes de a equipe ter rodado o código, foi quando paramos e fomos verificar por conta própria que entendemos que aquela confirmação valia pouco sozinha e precisariamos analisar tudo com mais cuidado.
+
+A lição que tiramos disso é que não usaríamos a IA como quem decide e sim somente como uma ferramente que auxilia. 
+
+Em todos esses pontos o que nos salvou foi parar antes de aceitar, foi conhecer o enunciado, recalcular, rodar o sistema. 
+
+Da próxima vez, manteríamos a ferramenta exatamente onde ela ajudou de verdade (organizar, formatar, gerar dados, revisar texto) e evitaríamos o reflexo de tratar a resposta dela como pronta só porque vinha bem escrita. 
+
+A IA está para facilitar o trabalho, não para resolvê-lo no nosso lugar, e isso a equipe percebeu durante o processo, não só no fim.
 
 
 *Documento elaborado pela equipe em conformidade com a Seção 13 do enunciado do Global Solution 1º Semestre 2026.*
