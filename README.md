@@ -12,7 +12,7 @@ Este projeto simula esse sistema, recebendo dados de uma missão experimental e 
 
 - Mayara Luisa Vicente Rosa - RM 571955
   
-- Victor Camargo - RM 568912
+- Victor de Camargo Gomes - RM 568912
 
 
 ## Estruturas de dados utilizadas
