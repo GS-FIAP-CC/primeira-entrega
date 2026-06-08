@@ -331,15 +331,14 @@ A lição que levamos deste trabalho é que a IA é uma ferramenta para facilita
 
 Mas em nenhum momento ela substituiu esse pensamento.
 
-Aprendemos também que mesmo as tarefas “seguras”, como fazer um checklist e depois um double-check, precisam ser conferidas. 
+Aprendemos também que mesmo as tarefas seguras, como fazer um checklist e depois um double-check, precisam ser conferidas.
 
-A IA montou um checklist ótimo e confirmou nossa entrega, mas quem garantiu que cada item estava de fato cumprido fomos nós, comparando linha por linha com o enunciado e rodando o código. 
+A IA montou um checklist ótimo e confirmou nossa entrega, mas quem garantiu que cada item estava de fato cumprido fomos nós, comparando linha por linha com o enunciado e rodando o código.
 
-Confiar no “está tudo certo” dela sem verificar seria abrir mão justamente da parte que prova que entendemos o trabalho, sendo uma ferramente que auxilia, mas nao faz. 
+Confiar que estava tudo certo dela sem verificar seria abrir mão justamente da parte que prova que entendemos o trabalho, sendo uma ferramenta que auxilia, mas não faz.
+Outra coisa que ficou evidente é que não basta copiar e colar, é preciso conhecer. Só conseguimos descartar a sugestão do dashboard, recusar o pytest e identificar a inconsistência das 21:00 porque definimos o escopo e os dados.
 
-Outra coisa que ficou evidente é que não basta copiar e colar, é preciso conhecer. Só conseguimos descartar a sugestão do dashboard, recusar o pytest e identificar a inconsistência das 21:00 porque dominávamos o escopo e os dados. 
-
-Quem não conhece o problema aceita qualquer resposta bem escrita, e respostas bem escritas e erradas são exatamente o tipo de armadilha que a IA produz com naturalidade. 
+Quem não conhece o problema aceita qualquer resposta bem escrita, e respostas bem escritas e erradas são exatamente o tipo de armadilha que a IA produz com naturalidade.
 
 Percebemos ainda, na prática, que prompt vago gera resposta genérica, quanto mais específicos fomos nos requisitos, mais útil foi o retorno.
 
