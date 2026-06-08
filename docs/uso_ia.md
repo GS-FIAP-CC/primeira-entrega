@@ -325,7 +325,7 @@ Ao longo do trabalho, ficou claro para a equipe que a IA acerta na forma com mui
 
 Esta seção deve ser escrita pela equipe, com base na experiência real. É um diferencial de avaliação demonstrar reflexão crítica sobre o uso da ferramenta.
 
-**O que aprendemos sobre usar IA em projetos técnicos:**
+**4.1 O que aprendemos sobre usar IA em projetos técnicos:**
 
 A lição que levamos deste trabalho é que a IA é uma ferramenta para facilitar, e não para resolver. Ela auxilia e tira do nosso caminho o que é repetitivo, gerar um dataset coerente, montar um esqueleto de relatório, listar requisitos a partir de um enunciado e isso é valioso e economiza tempo e assim focar no que realmente importa.
 
@@ -343,7 +343,7 @@ Quem não conhece o problema aceita qualquer resposta bem escrita, e respostas b
 
 Percebemos ainda, na prática, que prompt vago gera resposta genérica, quanto mais específicos fomos nos requisitos, mais útil foi o retorno.
 
-**Quando NÃO usaríamos IA novamente:**
+**4.2 Quando NÃO usaríamos IA novamente:**
 
 Revendo o caminho que fizemos, há momentos em que o apoio da IA quase nos levou para o lado errado, e que hoje conduziríamos de outra forma. 
 
