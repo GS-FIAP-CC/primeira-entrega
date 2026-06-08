@@ -1,38 +1,38 @@
-## LEITURA DOS DADOS DA MISSÃO AURORA BASE ##
-
-#importando csv e json para que seja possivel ler os dados.
 import csv
 import json
 
-""" Cada função lê um arquivo e organiza os dados na estrutura, mais adequada para o tipo de acesso necessário. """
+####################################################################
+# LEITURA DOS DADOS DA MISSÃO AURORA BASE
+#   Cada função lê um arquivo e organiza os dados na estrutura
+# mais adequada para o tipo de acesso necessário.
+####################################################################
 
-# Função para ler o arquivo modulos_status.csv e transformar o arquivo csv em um dicionário, no qual foi usado usamos porque o sistema acessa os módulos pelo nome (ex: modulos["suporte_vida"]).
+## Função para ler o arquivo modulos_status.csv e transformar o arquivo csv em um dicionário
+## Usamos dicionário porque o sistema acessa os módulos pelo nome (ex: modulos["suporte_vida"])
 def carregar_modulos(caminho):
-    # Abrir o arquivo e ler com DictReader.
+    # abrir o arquivo e ler com DictReader
     with open(caminho, encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
-         # Lista de dicionários
-        linhas = list(leitor)  
+        linhas = list(leitor)   # lista de dicionários
 
-    # Dicionário vazio.
-    modulos = {}             
+    modulos = {}              # dicionário vazio
     for linha in linhas:
-        # Converter os campos numéricos de tipo texto para tipo número inteiro e garantir que o status seja número inteiro.
-        linha["status"] = int(linha["status"])  
-        # Garantindo que a prioridade seja número inteiro.
-        linha["prioridade"] = int(linha["prioridade"])  
-        # Usa o nome do módulo como chave do dicionário.
+        ## Converter os campos numéricos de tipo texto para tipo número inteiro
+        linha["status"] = int(linha["status"])          ## Garantindo que o status seja número inteiro
+        linha["prioridade"] = int(linha["prioridade"])  ## Garantindo que a prioridade seja número inteiro
+        ## Usa o nome do módulo como chave do dicionário
         nome = linha["modulo"]
         modulos[nome] = linha
     return modulos
 
-# Função para ler o arquivo energia_leituras.csv e transformar o arquivo csv em uma lista e usamos lista porque a ordem cronológica das leituras importa (série temporal)
+## Função para ler o arquivo energia_leituras.csv e transformar o arquivo csv em uma lista
+## Usamos lista porque a ordem cronológica das leituras importa (série temporal)
 def carregar_leitura_energia(caminho):
     with open(caminho, encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
         linhas = list(leitor)
 
-    # Convertendo as variáveis numéricas para o tipo float (valores decimais)
+    ## Convertendo as variáveis numéricas para o tipo float (valores decimais)
     for linha in linhas:
         linha["geracao_solar_kwh"] = float(linha["geracao_solar_kwh"])
         linha["geracao_eolica_kwh"] = float(linha["geracao_eolica_kwh"])
@@ -42,13 +42,14 @@ def carregar_leitura_energia(caminho):
 
     return linhas
 
-# Função para ler o arquivo variaveis_ambientais.csv e transformar o arquivo csv em uma lista, mesma lógica da energia: é uma série temporal, então a ordem das leituras importa
+## Função para ler o arquivo variaveis_ambientais.csv e transformar o arquivo csv em uma lista
+## Mesma lógica da energia: é uma série temporal, então a ordem das leituras importa
 def carregar_variaveis_ambientais(caminho):
     with open(caminho, encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
         linhas = list(leitor)
 
-    # Convertendo as variáveis numéricas para o tipo float
+    ## Convertendo as variáveis numéricas para o tipo float
     for linha in linhas:
         linha["temp_externa_c"] = float(linha["temp_externa_c"])
         linha["temp_interna_c"] = float(linha["temp_interna_c"])
@@ -60,9 +61,46 @@ def carregar_variaveis_ambientais(caminho):
     return linhas
 
 
-# Função para ler o arquivo log_eventos.json e retornar uma lista de eventos e Usa o módulo json (não csv). Não precisa converter tipos, pois o JSON já preserva números e texto
+## Função para ler o arquivo log_eventos.json e retornar uma lista de eventos
+## Usa o módulo json (não csv). Não precisa converter tipos, pois o JSON já preserva números e texto
 def carregar_log(caminho):
     with open(caminho, encoding="utf-8") as arquivo:
         dados = json.load(arquivo)
 
     return dados["eventos"]
+
+def montar_matriz_energia(energia):
+  
+    matriz =[]
+    
+    for leitura in energia:
+        linha = [
+            leitura["horario"],
+            leitura["geracao_solar_kwh"],
+            leitura["geracao_eolica_kwh"],
+            leitura["consumo_kwh"],
+            leitura["reserva_bateria_kwh"],
+            leitura["reserva_bateria_pct"],
+        ]
+        matriz.append(linha)
+        
+    return matriz
+
+
+def analisar_telemetria(matriz):
+    ## Média de consumo no dia
+    consumo = [linha[3] for linha in matriz]
+    media_consumo  = sum(consumo)/len(consumo)
+    
+    ## Menor reserva do dia
+    reserva = [linha[5] for linha in matriz]
+    menor_reserva = min(reserva)
+
+    ## Balanço energético (geração - consumo) por horário
+    balanco = []
+    for linha in matriz:
+        horario = linha[0]
+        saldo = linha[1] + linha[2] - linha[3]
+        balanco.append((horario, saldo))
+        
+    return media_consumo, menor_reserva, balanco
