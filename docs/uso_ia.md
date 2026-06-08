@@ -178,7 +178,7 @@ log_eventos.json — 10 eventos em cadeia de causa e efeito ao longo do dia: tur
 Tem índice automático e os tópicos estão como cabeçalhos, então o Word atualiza o sumário sozinho (clica nele → "Atualizar campo"). O coração do relatório é o tópico 6 (Metodologia), onde entra a justificativa da regressão linear + média móvel.
 Quer que eu já preencha algum tópico com o conteúdo real do seu projeto, ou prefere ir escrevendo você mesma?. ```
 
-A ordem dos tópicos foi aproveitada como ponto de partida, mas a sugestão de um dashboard web foi descartada, já que o enunciado pede saída apenas no terminal, sem interface gráfica nem frameworks web.
+A ordem dos tópicos foi aproveitada como ponto de partida, mas a sugestão de um dashboard web foi descartada, já que o enunciado pede saída apenas no terminal, sem interface gráfica nem frameworks web, bem como devolvendo um arquivo de 10 paginas para os topicos, enquanto o enunciado diz de 4 ate 8 paginas.
 
 ### 1.3 Montagem do checklist de requisitos
 
