@@ -151,7 +151,7 @@ Com o dataset de exemplo, o sistema gera duas recomendações: ativar modo econo
 
 ## Link do vídeo
 
-A inserir antes da entrega. O link também precisa ser copiado para o arquivo `docs/link_video.txt`.
+https://youtu.be/-HEvgmiLHVQ
 
 ## Conclusões e aprendizados
 
